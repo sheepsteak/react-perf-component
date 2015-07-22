@@ -23,13 +23,15 @@ export default class MyComponent extends React.Component {
 
 It can also fallback to being used like:
 ```javascript
-var perf = require('react-perf-component')
+import perf from 'react-perf-component'
 
-var MyComponent = React.createClass({
-  render: function() {...}
-});
+class MyComponent extends React.Component {
+  render() {
+    ...
+  }
+}
 
-module.exports = perf(MyComponent);
+export default perf(MyComponent);
 ```
 
 ### Thanks
