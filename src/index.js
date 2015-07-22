@@ -2,7 +2,7 @@ import React from 'react/addons';
 
 export default function perf(Component) {
   if(process.env.NODE_ENV !== 'production') {
-    if (!Component instanceof React.Component) {
+    if (!(Component.prototype instanceof React.Component)) {
       throw new Error('Component must be a React component');
     }
 
