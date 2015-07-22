@@ -1,6 +1,6 @@
 {
   "name": "react-perf-component",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Higher-order component that can measure component performance",
   "main": "lib/index.js",
   "scripts": {
