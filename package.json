@@ -30,9 +30,13 @@
     "eslint-plugin-react": "^2.7.0",
     "injectr": "^0.5.1",
     "jasmine": "^2.3.1",
-    "react-shallow-testutils": "^0.2.1"
+    "react": "0.14.3",
+    "react-addons-perf": "0.14.0",
+    "react-addons-test-utils": "^0.14.0",
+    "react-shallow-testutils": "^0.7.1"
   },
   "peerDependencies": {
-    "react": "^0.13.3"
+    "react": "^0.14.0",
+    "react-addons-perf": "^0.14.0"
   }
 }
