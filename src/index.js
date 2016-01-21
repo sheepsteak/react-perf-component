@@ -1,4 +1,5 @@
-import React from 'react/addons';
+import React from 'react';
+import ReactPerf from 'react-addons-perf';
 
 /**
  * Wraps the passed in `Component` in a higher-order component. It can then
@@ -16,10 +17,10 @@ export default function perf(Component) {
 
     return class Perf extends React.Component {
       componentDidMount() {
-        React.addons.Perf.start();
+        ReactPerf.start();
       }
       componentDidUpdate() {
-        const measurements = React.addons.Perf.getLastMeasurements();
+        const measurements = ReactPerf.getLastMeasurements();
 
         if (measurements.length > 0) {
           this.totalRenders = (this.totalRenders || 0) + 1;
@@ -27,8 +28,8 @@ export default function perf(Component) {
 
           console.log(`Average: ${this.totalTime / this.totalRenders} over ${this.totalRenders} renders.`);
 
-          React.addons.Perf.printWasted(measurements);
-          React.addons.Perf.start();
+          ReactPerf.printWasted(measurements);
+          ReactPerf.start();
         }
       }
       render() {

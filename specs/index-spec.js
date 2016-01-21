@@ -1,6 +1,7 @@
 import injectr from 'injectr';
-import React from 'react/addons';
-import testUtils from 'react-shallow-testutils';
+import React from 'react';
+import {createRenderer} from 'react-addons-test-utils';
+import ShallowTestUtils from 'react-shallow-testutils';
 
 class TestComponent extends React.Component {
   render() {
@@ -13,11 +14,9 @@ class TestComponent extends React.Component {
 describe('Perf component', function() {
   beforeEach(function() {
     this.MockReactAddons = {
-      Perf: {
-        getLastMeasurements: jasmine.createSpy('Perf.getLastMeasurements'),
-        printWasted: jasmine.createSpy('Perf.printWasted'),
-        start: jasmine.createSpy('Perf.start')
-      }
+      getLastMeasurements: jasmine.createSpy('Perf.getLastMeasurements'),
+      printWasted: jasmine.createSpy('Perf.printWasted'),
+      start: jasmine.createSpy('Perf.start')
     };
 
     this.MockConsole = {
@@ -27,7 +26,7 @@ describe('Perf component', function() {
     this.NODE_ENV = 'development';
 
     this.makePerf = () => injectr('../../src/index.js', {
-      'react/addons': Object.assign({}, React, {addons: this.MockReactAddons})
+      'react-addons-perf': this.MockReactAddons
     }, {
       console: this.MockConsole,
       process: {env: {NODE_ENV: this.NODE_ENV}}
@@ -48,10 +47,11 @@ describe('Perf component', function() {
 
       it('should render the passed component and pass any props', function() {
         const Perf = this.perf(TestComponent);
-        const renderer = new testUtils.Renderer();
-        const perf = renderer.render(Perf, null, {test: 1});
+        const renderer = createRenderer();
+        renderer.render(<Perf test={1} />);
+        const perf = renderer.getRenderOutput();
 
-        const mockPerfChild = testUtils.findWithType(perf, TestComponent);
+        const mockPerfChild = ShallowTestUtils.findWithType(perf, TestComponent);
         expect(mockPerfChild.props.test).toEqual(1);
       });
 
@@ -62,25 +62,25 @@ describe('Perf component', function() {
           const perf = new Perf();
           perf.componentDidMount();
 
-          expect(this.MockReactAddons.Perf.start).toHaveBeenCalled();
+          expect(this.MockReactAddons.start).toHaveBeenCalled();
         });
 
         it('should not print measurements if none are available', function() {
           const Perf = this.perf(TestComponent);
-          this.MockReactAddons.Perf.getLastMeasurements.and.returnValue([]);
+          this.MockReactAddons.getLastMeasurements.and.returnValue([]);
 
           const perf = new Perf();
           perf.componentDidMount();
           perf.componentDidUpdate();
 
-          expect(this.MockReactAddons.Perf.getLastMeasurements).toHaveBeenCalled();
-          expect(this.MockReactAddons.Perf.printWasted).not.toHaveBeenCalled();
+          expect(this.MockReactAddons.getLastMeasurements).toHaveBeenCalled();
+          expect(this.MockReactAddons.printWasted).not.toHaveBeenCalled();
           expect(this.MockConsole.log).not.toHaveBeenCalled();
         });
 
         it('should print measurements if some are available', function() {
           const Perf = this.perf(TestComponent);
-          this.MockReactAddons.Perf.getLastMeasurements.and.returnValue([{
+          this.MockReactAddons.getLastMeasurements.and.returnValue([{
             totalTime: 192
           }]);
 
@@ -88,8 +88,8 @@ describe('Perf component', function() {
           perf.componentDidMount();
           perf.componentDidUpdate();
 
-          expect(this.MockReactAddons.Perf.getLastMeasurements).toHaveBeenCalled();
-          expect(this.MockReactAddons.Perf.printWasted).toHaveBeenCalled();
+          expect(this.MockReactAddons.getLastMeasurements).toHaveBeenCalled();
+          expect(this.MockReactAddons.printWasted).toHaveBeenCalled();
           expect(this.MockConsole.log).toHaveBeenCalled();
         });
       });
