@@ -4,8 +4,9 @@
   "description": "Higher-order component that can measure component performance",
   "main": "lib/index.js",
   "scripts": {
+    "clean": "rimraf lib/",
     "compile": "babel -d lib/ src/",
-    "prepublish": "npm test && npm run compile",
+    "prepublish": "npm run clean && npm test && npm run compile",
     "test": "JASMINE_CONFIG_PATH=jasmine.json jasmine"
   },
   "repository": {
@@ -37,7 +38,8 @@
     "react": "0.14.3",
     "react-addons-perf": "0.14.0",
     "react-addons-test-utils": "^0.14.0",
-    "react-shallow-testutils": "^0.7.1"
+    "react-shallow-testutils": "^0.7.1",
+    "rimraf": "2.5.2"
   },
   "peerDependencies": {
     "react": "^0.14.0",
