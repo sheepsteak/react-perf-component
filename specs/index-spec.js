@@ -1,7 +1,7 @@
 import injectr from 'injectr';
 import React from 'react';
 import {createRenderer} from 'react-addons-test-utils';
-import ShallowTestUtils from 'react-shallow-testutils';
+import {findWithType} from 'react-shallow-testutils';
 
 class TestComponent extends React.Component {
   render() {
@@ -51,7 +51,7 @@ describe('Perf component', function() {
         renderer.render(<Perf test={1} />);
         const perf = renderer.getRenderOutput();
 
-        const mockPerfChild = ShallowTestUtils.findWithType(perf, TestComponent);
+        const mockPerfChild = findWithType(perf, TestComponent);
         expect(mockPerfChild.props.test).toEqual(1);
       });
 
