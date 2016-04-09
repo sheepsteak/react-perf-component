@@ -1,12 +1,3 @@
-require('babel/register');
-var injectr = require('injectr');
-
-injectr.onload = function(filename, contents) {
-  return require('babel').transform(contents, {
-    filename: filename
-  }).code;
-};
-
 process.env.JASMINE_CONFIG_PATH = 'specs/support/jasmine.json';
 
 var path = require('path');
