@@ -65,19 +65,6 @@ describe('Perf component', function() {
           expect(this.MockReactAddons.start).toHaveBeenCalled();
         });
 
-        it('should not print measurements if none are available', function() {
-          const Perf = this.perf(TestComponent);
-          this.MockReactAddons.getLastMeasurements.and.returnValue([]);
-
-          const perf = new Perf();
-          perf.componentDidMount();
-          perf.componentDidUpdate();
-
-          expect(this.MockReactAddons.getLastMeasurements).toHaveBeenCalled();
-          expect(this.MockReactAddons.printWasted).not.toHaveBeenCalled();
-          expect(this.MockConsole.log).not.toHaveBeenCalled();
-        });
-
         it('should print measurements if some are available', function() {
           const Perf = this.perf(TestComponent);
           this.MockReactAddons.getLastMeasurements.and.returnValue([{
@@ -90,7 +77,6 @@ describe('Perf component', function() {
 
           expect(this.MockReactAddons.getLastMeasurements).toHaveBeenCalled();
           expect(this.MockReactAddons.printWasted).toHaveBeenCalled();
-          expect(this.MockConsole.log).toHaveBeenCalled();
         });
       });
     });

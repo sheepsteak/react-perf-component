@@ -19,15 +19,8 @@ export default function perf(Component) {
       componentDidUpdate() {
         const measurements = ReactPerf.getLastMeasurements();
 
-        if (measurements.length > 0) {
-          this.totalRenders = (this.totalRenders || 0) + 1;
-          this.totalTime = (this.totalTime || 0) + measurements[0].totalTime;
-
-          console.log(`Average: ${this.totalTime / this.totalRenders} over ${this.totalRenders} renders.`);
-
-          ReactPerf.printWasted(measurements);
-          ReactPerf.start();
-        }
+        ReactPerf.printWasted(measurements);
+        ReactPerf.start();
       }
       render() {
         return <Component {...this.props} />;
