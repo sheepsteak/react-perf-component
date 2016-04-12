@@ -11,9 +11,6 @@ import ReactPerf from 'react-addons-perf';
  */
 export default function perf(Component) {
   if(process.env.NODE_ENV !== 'production') {
-    if (!(Component.prototype instanceof React.Component)) {
-      throw new Error('Component must be a React component');
-    }
 
     return class Perf extends React.Component {
       componentDidMount() {

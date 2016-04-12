@@ -94,12 +94,6 @@ describe('Perf component', function() {
         });
       });
     });
-
-    describe('given an object is passed', function() {
-      it('should throw an error', function() {
-        expect(() => this.perf({})).toThrow();
-      });
-    });
   });
 
   describe('given `NODE_ENV` is `production`', function() {
