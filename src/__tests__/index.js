@@ -40,6 +40,13 @@ describe('perf higher-order component', () => {
     expect(MyCompPerf.displayName).toContain(MyComp.name);
   });
 
+  it('expose wrapped component in WrappedComponent', () => {
+    const MyComp = () => <div className="my-comp" />;
+    const MyCompPerf = perf(MyComp);
+
+    expect(MyCompPerf.WrappedComponent).toBe(MyComp);
+  });
+
   it('starts ReactPerf on mount', () => {
     const MyComp = () => <div className="my-comp" />;
     const MyCompPerf = perf(MyComp);

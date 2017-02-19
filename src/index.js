@@ -40,5 +40,6 @@ export default function perf(Target) {
   }
 
   Perf.displayName = `perf(${Target.displayName || Target.name || 'Component'})`;
+  Perf.WrappedComponent = Target;
   return Perf;
 }
