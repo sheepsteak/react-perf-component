@@ -1,3 +1,4 @@
 circle.yml
 .eslintrc
 src/
+__tests__

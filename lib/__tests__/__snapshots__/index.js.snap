@@ -1,0 +1,18 @@
+exports[`perf higher-order component does not wrap the passed in component when in production 1`] = `
+<MyComp
+  testProp="1">
+  <div
+    className="my-comp" />
+</MyComp>
+`;
+
+exports[`perf higher-order component wraps the passed in component when not in production 1`] = `
+<perf(MyComp)
+  testProp="1">
+  <MyComp
+    testProp="1">
+    <div
+      className="my-comp" />
+  </MyComp>
+</perf(MyComp)>
+`;
