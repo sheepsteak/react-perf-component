@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactPerf from 'react-addons-perf';
 
 /**
  * Wraps the passed in `Component` in a higher-order component. It can then
@@ -10,7 +9,9 @@ import ReactPerf from 'react-addons-perf';
  * @return {ReactComponent}           the wrapped component
  */
 export default function perf(Component) {
-  if(process.env.NODE_ENV !== 'production') {
+  if (process.env.NODE_ENV !== 'production') {
+    // eslint-disable-next-line global-require
+    const ReactPerf = require('react-addons-perf');
 
     return class Perf extends React.Component {
       componentDidMount() {
@@ -26,7 +27,6 @@ export default function perf(Component) {
         return <Component {...this.props} />;
       }
     };
-  } else {
-    return Component;
   }
+  return Component;
 }
