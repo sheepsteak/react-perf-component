@@ -36,6 +36,7 @@
     "injectr": "^0.5.1",
     "jasmine": "^2.3.1",
     "react": "^15.0.0",
+    "react-dom": "^15.0.0",
     "react-addons-perf": "^15.0.0",
     "react-addons-test-utils": "^15.0.0",
     "react-shallow-testutils": "^2.0.0-beta1",
@@ -43,6 +44,7 @@
   },
   "peerDependencies": {
     "react": "^15.0.0",
+    "react-dom": "^15.0.0",
     "react-addons-perf": "^15.0.0"
   }
 }
