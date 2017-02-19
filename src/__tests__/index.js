@@ -42,13 +42,24 @@ describe('perf higher-order component', () => {
     expect(ReactPerf.start).toHaveBeenCalled();
   });
 
-  it('collects results and starts again in update', () => {
+  it('stops ReactPerf on unmount', () => {
+    const MyComp = () => <div className="my-comp" />;
+    const MyCompPerf = perf(MyComp);
+
+    const result = mount(<MyCompPerf />);
+    result.unmount();
+
+    expect(ReactPerf.stop).toHaveBeenCalled();
+  });
+
+  it('stops, collects results and starts again in update', () => {
     const MyComp = () => <div className="my-comp" />;
     const MyCompPerf = perf(MyComp);
 
     const result = mount(<MyCompPerf />);
     result.setProps();
 
+    expect(ReactPerf.stop).toHaveBeenCalled();
     expect(ReactPerf.getLastMeasurements).toHaveBeenCalled();
     expect(ReactPerf.printWasted).toHaveBeenCalled();
     expect(ReactPerf.start).toHaveBeenCalled();

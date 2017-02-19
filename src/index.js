@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 /**
  * Wraps the passed in `Component` in a higher-order component. It can then
@@ -8,25 +8,36 @@ import React from 'react';
  * @param  {ReactComponent} Component the component to wrap
  * @return {ReactComponent}           the wrapped component
  */
-export default function perf(Component) {
-  if (process.env.NODE_ENV !== 'production') {
-    // eslint-disable-next-line global-require
-    const ReactPerf = require('react-addons-perf');
-
-    return class Perf extends React.Component {
-      componentDidMount() {
-        ReactPerf.start();
-      }
-      componentDidUpdate() {
-        const measurements = ReactPerf.getLastMeasurements();
-
-        ReactPerf.printWasted(measurements);
-        ReactPerf.start();
-      }
-      render() {
-        return <Component {...this.props} />;
-      }
-    };
+export default function perf(Target) {
+  if (process.env.NODE_ENV === 'production') {
+    return Target;
   }
-  return Component;
+
+  // eslint-disable-next-line global-require
+  const ReactPerf = require('react-addons-perf');
+
+  class Perf extends Component {
+    componentDidMount() {
+      ReactPerf.start();
+    }
+
+    componentDidUpdate() {
+      ReactPerf.stop();
+
+      const measurements = ReactPerf.getLastMeasurements();
+
+      ReactPerf.printWasted(measurements);
+      ReactPerf.start();
+    }
+
+    componentWillUnmount() {
+      ReactPerf.stop();
+    }
+
+    render() {
+      return <Target {...this.props} />;
+    }
+  }
+
+  return Perf;
 }
