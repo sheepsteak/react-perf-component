@@ -7,12 +7,12 @@ exports[`perf higher-order component does not wrap the passed in component when 
 `;
 
 exports[`perf higher-order component wraps the passed in component when not in production 1`] = `
-<Perf
+<perf(MyComp)
   testProp="1">
   <MyComp
     testProp="1">
     <div
       className="my-comp" />
   </MyComp>
-</Perf>
+</perf(MyComp)>
 `;

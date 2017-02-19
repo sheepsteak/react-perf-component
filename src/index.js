@@ -39,5 +39,6 @@ export default function perf(Target) {
     }
   }
 
+  Perf.displayName = `perf(${Target.displayName || Target.name || 'Component'})`;
   return Perf;
 }

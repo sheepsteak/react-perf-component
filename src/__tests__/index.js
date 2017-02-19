@@ -33,6 +33,13 @@ describe('perf higher-order component', () => {
     expect(toJson(result)).toMatchSnapshot();
   });
 
+  it('shows wrapped component in displayName', () => {
+    const MyComp = () => <div className="my-comp" />;
+    const MyCompPerf = perf(MyComp);
+
+    expect(MyCompPerf.displayName).toContain(MyComp.name);
+  });
+
   it('starts ReactPerf on mount', () => {
     const MyComp = () => <div className="my-comp" />;
     const MyCompPerf = perf(MyComp);
