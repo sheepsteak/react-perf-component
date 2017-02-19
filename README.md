@@ -1,4 +1,7 @@
 # react-perf-component
+
+[![CircleCI](https://circleci.com/gh/sheepsteak/react-perf-component.svg?style=svg)](https://circleci.com/gh/sheepsteak/react-perf-component)
+
 A [higher-order React component](https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750) for testing the performance of other components.
 
 At the moment it only prints the result from [`Perf.printWasted`](http://facebook.github.io/react/docs/perf.html#perf.printwastedmeasurements) as that's the most useful part.
