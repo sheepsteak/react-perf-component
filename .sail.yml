@@ -1,0 +1,15 @@
+tasks:
+  install:
+    image: "node:boron-alpine"
+    command: ["yarn"]
+    args: []
+  lint:
+    image: "node:boron-alpine"
+    command: ["yarn"]
+    args: ["lint"]
+  test:
+    image: "node:boron-alpine"
+    command: ["yarn"]
+    args: ["test"]
+  security:
+    image: "allthings/nsp"
